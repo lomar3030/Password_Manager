@@ -1,6 +1,11 @@
 from utils import password_generator
 from storage import save_a_password
 from storage import retrieve_password
+from storage import master_password
+from storage import sign_in
+
+master_password()
+sign_in()
 
 #Menu
 while True:

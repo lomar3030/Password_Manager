@@ -28,3 +28,39 @@ def retrieve_password():
         else:
             print("No password saved for this site")
 
+def master_password():
+    with open("master.json", "r") as file:
+        data = json.load(file)
+#If the length of data is 0 or there is nothing in the json file, I will have them create a username and passord and then write it to the file.
+        while True:
+            if len(data) == 0:
+                print("Please create an account")
+                create_username = input("Choose a username: ") 
+                create_password = input("Choose a password: ")
+                password_confirm = input("Confirm password: ")
+                if create_password == password_confirm:
+                    master_password = {
+                        "Username": create_username,
+                        "Password": password_confirm
+                    }
+                    data = master_password
+                    with open("master.json", "w") as file:
+                        json.dump(data, file, indent=4)
+                else:
+                    print("Please make sure your passwords match.")
+                    break
+            else:
+                break
+
+
+def sign_in():
+    with open("master.json", "r") as file:
+        data = json.load(file)
+        while True:
+            username = input("Username: ")
+            master_password = input("Password: ")
+            if username == data["Username"] and master_password == data["Password"]:
+                break
+            else:
+                print("Your username or password are incorrect")
+
